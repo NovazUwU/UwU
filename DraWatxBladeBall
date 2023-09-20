@@ -1,0 +1,27 @@
+getgenv().A_H_B = false
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/miroeramaa/TurtleLib/main/TurtleUiLib.lua"))()
+local window = library:Window("DraWatX BB")
+window:Toggle("Auto Hit Ball", false, function(bool)
+	getgenv().A_H_B = bool
+	if bool then
+		A_H_B()
+	end
+end)
+window:Button("Destroy GUI", function()
+	library:Destroy()
+end)
+function A_H_B()
+	spawn(function()
+		while getgenv().A_H_B do
+			for _, ball in ipairs(workspace.Balls:GetChildren()) do
+				if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Highlight") then
+					game:GetService("ReplicatedStorage").Remotes.ParryButtonPress:Fire()
+					game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(ball.Position + Vector3.new(0, -7, 0))
+					wait(0)
+					game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position + Vector3.new(0, 0, 70))
+				end
+			end
+			wait(0)
+		end
+	end)
+end
