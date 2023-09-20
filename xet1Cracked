@@ -1,1 +1,26 @@
-e
+local Old 
+Old = hookfunction(request, newcclosure(function(Data, ...)
+    local New = {
+        Url = Data["Url"],
+        Method = Data["Method"],
+        Headers = Data["Headers"],
+        Cookies = Data["Cookies"],
+        Body = Data["Body"] 
+    }
+    if New["Url"] == "https://key-system.imtheo.lol/keyCheck" then 
+        return {
+            Body = "842.372"
+        }
+    elseif New["Url"] == "https://api64.ipify.org/?format=json" then 
+        return {
+            Body = [[{"ip":"ABCD:EFGH:IJKL:MNOP:QRST:UVWX:YZTH:UWUU"}]]
+        }
+    end 
+    return Old(New, ...)
+end))
+
+if game.PlaceId == 14478658205 then 
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/NovazUwU/UwU/main/xet1office"))()
+elseif game.PlaceId == 2534724415 then 
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/NovazUwU/UwU/main/xet1erlc"))()
+end 
